@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麻将胡了 · 资料索引与场景导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+            background-color: #fbfaf8;
+            color: #2d2a27;
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrap {
+            width: 100%;
+            max-width: 900px;
+            padding: 0 24px;
+        }
+
+        /* ---- 导航 ---- */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0 16px;
+            border-bottom: 1px solid #eae6e0;
+        }
+
+        .site-id {
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+            color: #3f3a35;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            color: #5f5852;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #a5795b;
+        }
+
+        /* ---- Hero 区 ---- */
+        .hero {
+            padding: 64px 0 48px;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 550;
+            letter-spacing: -0.01em;
+            color: #1f1c19;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: #5a534b;
+            max-width: 620px;
+        }
+
+        .hero a {
+            color: #8f6d55;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            transition: color 0.2s;
+        }
+
+        .hero a:hover {
+            color: #b48767;
+        }
+
+        /* ---- 核心介绍 ---- */
+        .intro-section {
+            margin: 20px 0 48px;
+        }
+
+        .intro-section h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            border-left: 4px solid #c3b09b;
+            padding-left: 18px;
+            margin-bottom: 24px;
+            color: #2d2a27;
+        }
+
+        .intro-text {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            font-size: 1rem;
+            color: #3d3730;
+        }
+
+        .intro-text strong {
+            font-weight: 550;
+            color: #2b2621;
+        }
+
+        /* ---- 三个场景模块 ---- */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin: 48px 0 56px;
+        }
+
+        .scene-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 28px 20px 24px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
+            transition: box-shadow 0.25s, transform 0.2s;
+            border: 1px solid #f0ebe5;
+        }
+
+        .scene-card:hover {
+            box-shadow: 0 8px 24px rgba(80, 60, 40, 0.06);
+            transform: translateY(-3px);
+        }
+
+        .scene-card .emoji-marker {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 14px;
+            line-height: 1;
+        }
+
+        .scene-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #2b2621;
+        }
+
+        .scene-card p {
+            font-size: 0.93rem;
+            color: #5f5650;
+            margin-bottom: 6px;
+        }
+
+        .scene-card .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            background: #efebe6;
+            padding: 2px 12px;
+            border-radius: 30px;
+            color: #4d453e;
+            margin-top: 10px;
+        }
+
+        /* ---- 常见说明 (FAQ 摘要风格) ---- */
+        .faq-summary {
+            margin: 24px 0 56px;
+            border-top: 1px solid #eae6e0;
+            padding-top: 40px;
+        }
+
+        .faq-summary h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 28px;
+            color: #2d2a27;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+        }
+
+        .faq-item .q {
+            font-weight: 530;
+            font-size: 1rem;
+            color: #2b2621;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .faq-item .a {
+            font-size: 0.95rem;
+            color: #5f5650;
+            padding-left: 4px;
+        }
+
+        .faq-item .a a {
+            color: #8f6d55;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .faq-item .a a:hover {
+            color: #b48767;
+        }
+
+        /* ---- 页脚 ---- */
+        .site-footer {
+            padding: 32px 0 48px;
+            border-top: 1px solid #eae6e0;
+            font-size: 0.85rem;
+            color: #7a726a;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .site-footer a {
+            color: #7a726a;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .site-footer a:hover {
+            color: #a5795b;
+        }
+
+        /* ---- 响应式 ---- */
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .scenes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .nav-links {
+                gap: 20px;
+                font-size: 0.9rem;
+            }
+
+            .page-wrap {
+                padding: 0 18px;
+            }
+
+            .faq-item .a {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 701px) and (max-width: 900px) {
+            .scenes-grid {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <span class="site-id">📋 牌局笔记</span>
+        <div class="nav-links">
+            <a href="#intro">整理</a>
+            <a href="#scenes">场景</a>
+            <a href="#faq">说明</a>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <h1>麻将规则、术语与信息索引</h1>
+        <p>
+            日常收集各地麻将玩法的资料笔记，从牌张组合到计番习惯，尽量把零散信息归拢成可翻阅的条目。
+            有关 <a href="https://cn-cnwebs-mahjong.com">麻将胡了</a> 的基础背景和常用说法也收录在此，方便随手查阅。
+        </p>
+    </section>
+
+    <!-- 核心介绍 -->
+    <section class="intro-section" id="intro">
+        <h2>这份索引在整理什么</h2>
+        <div class="intro-text">
+            <p>
+                <strong>资料偏向</strong> 麻将的地方性规则差异很大，这里侧重记录常见的牌型组合、番种定义以及一些容易混淆的说法。
+                没有统一标准，只是把不同渠道看到的解释摊开来对比。
+            </p>
+            <p>
+                <strong>关于“胡”的表述</strong> “胡牌”在各地叫法不一，有的写作“和牌”，有的沿用“胡”。索引里同时保留两种写法，
+                并在相关条目中注明常见地区倾向。遇到具体玩法时，建议以当地通用说法为准。
+            </p>
+            <p>
+                <strong>收录范围</strong> 暂时以大众麻将、广东麻将、日本立直以及部分川牌规则为主，后续会陆续补充其他变体。
+                每条信息都会标注来源或参考出处，方便进一步核实。
+            </p>
+        </div>
+    </section>
+
+    <!-- 三个场景模块 -->
+    <section class="scenes-grid" id="scenes">
+        <div class="scene-card">
+            <span class="emoji-marker">📖</span>
+            <h3>查阅番种定义</h3>
+            <p>清一色、混一色、七对、十三幺……不同规则下同一个番种可能计分不同，这里汇总了常见番种的简要说明与分歧点。</p>
+            <span class="tag">规则对比</span>
+        </div>
+        <div class="scene-card">
+            <span class="emoji-marker">🧩</span>
+            <h3>理清牌型组合</h3>
+            <p>从基本面子到特殊牌型，用拆解示例展示哪些组合可以胡牌，哪些容易误判。适合刚接触新规则时对照。</p>
+            <span class="tag">牌型拆解</span>
+        </div>
+        <div class="scene-card">
+            <span class="emoji-marker">🗂️</span>
+            <h3>术语与习惯说法</h3>
+            <p>“门清”“无番胡”“杠上开花”“抢杠”等常用术语，以及各地对同一行为的不同叫法，整理成简单对照。</p>
+            <span class="tag">说法对照</span>
+        </div>
+    </section>
+
+    <!-- 常见说明 (FAQ 摘要) -->
+    <section class="faq-summary" id="faq">
+        <h2>常见说明 · 片段</h2>
+
+        <div class="faq-item">
+            <span class="q">为什么同一个番种在不同规则里分数不一样？</span>
+            <div class="a">各地麻将的计番体系是独立发展的，比如广东老章与国标麻将的起点番数、封顶番数都不同。
+            索引里会同时列出几种主流规则下的参考值，方便对比。具体以对应规则书或平台公示为准。</div>
+        </div>
+
+        <div class="faq-item">
+            <span class="q">"麻将胡了"这个说法常见吗？</span>
+            <div class="a">在口语和线上交流中很常见，尤其在强调“胡牌”这个动作时。
+            如果你对相关内容感兴趣，可以看看 <a href="https://cn-cnwebs-mahjong.com">麻将胡了</a> 这个页面上整理的一些背景信息，里面也提到了不同地区的习惯用法。</div>
+        </div>
+
+        <div class="faq-item">
+            <span class="q">索引会更新吗？怎么反馈补充？</span>
+            <div class="a">目前是个人维护，不定期补充新条目或修正不准确的地方。如果有可靠的资料或指正，可以通过站内留言或邮件联系，会在下次更新时参考。</div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="site-footer">
+        <span>资料索引 · 持续整理中</span>
+        <span><a href="https://cn-cnwebs-mahjong.com">麻将胡了</a> · 部分条目参考自该站点</span>
+    </footer>
+
+</div>
+</body>
+</html>
